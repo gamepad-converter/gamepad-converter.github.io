@@ -26,100 +26,63 @@
 <div class="page_title">N100</div>
 
   <div class="toc"><span class="toctitle">Table of Contents</span><ul>
-<li><a href="#_1">硬件形态</a><ul>
-<li><a href="#quick-start">Quick Start</a><ul>
-<li><a href="#install">Install</a></li>
-<li><a href="#update">Update</a></li>
-<li><a href="#init-site">Init Site</a></li>
-<li><a href="#create-a-new-wiki">Create a new wiki</a></li>
-<li><a href="#generate">Generate</a></li>
-<li><a href="#preview">Preview</a></li>
+<li><a href="#_1">硬件介绍</a><ul>
+<li><a href="#_2">已支持主机：</a></li>
+<li><a href="#_3">已支持外设：</a></li>
 </ul>
 </li>
-<li><a href="#others">Others</a></li>
-<li><a href="#license">License</a></li>
+<li><a href="#_4">功能介绍</a><ul>
+<li><a href="#_5">基本功能</a></li>
+<li><a href="#_6">高级功能</a></li>
+<li><a href="#ns">连接NS主机</a></li>
+<li><a href="#ps4">连接PS4主机</a></li>
+<li><a href="#xbox-one">连接Xbox One主机</a></li>
+</ul>
+</li>
+<li><a href="#_7">其他信息</a><ul>
+<li><a href="#n100ps4">老版本N100无法直接插入PS4的解决方法</a></li>
+<li><a href="#_8">背光键盘</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<h1 id="_1">硬件形态</h1>
-<p><img alt="" src="N100/n100.jpg" /></p>
-<p><a href="https://pypi.python.org/pypi/simiki"><img alt="Latest Version" src="http://img.shields.io/pypi/v/simiki.svg" /></a><br />
-<a href="https://github.com/tankywoo/simiki/blob/master/LICENSE"><img alt="The MIT License" src="http://img.shields.io/badge/license-MIT-yellow.svg" /></a><br />
-<a href="https://travis-ci.org/tankywoo/simiki"><img alt="Build Status" src="https://travis-ci.org/tankywoo/simiki.svg" /></a><br />
-<a href="https://coveralls.io/r/tankywoo/simiki"><img alt="Coverage Status" src="https://img.shields.io/coveralls/tankywoo/simiki.svg" /></a></p>
-<p>Simiki is a simple wiki framework, written in <a href="https://www.python.org/">Python</a>.</p>
-<ul>
-<li>Easy to use. Creating a wiki only needs a few steps</li>
-<li>Use <a href="http://daringfireball.net/projects/markdown/">Markdown</a>. Just open your editor and write</li>
-<li>Store source files by category</li>
-<li>Static HTML output</li>
-<li>A CLI tool to manage the wiki</li>
-</ul>
-<p>Simiki is short for <code>Simple Wiki</code> :)</p>
-<h2 id="quick-start">Quick Start</h2>
-<h3 id="install">Install</h3>
-<div class="hlcode"><pre><span class="n">pip</span> <span class="n">install</span> <span class="n">simiki</span>
-</pre></div>
-
-
-<h3 id="update">Update</h3>
-<div class="hlcode"><pre><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">simiki</span>
-</pre></div>
-
-
-<h3 id="init-site">Init Site</h3>
-<div class="hlcode"><pre><span class="n">mkdir</span> <span class="n">mywiki</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">mywiki</span>
-<span class="n">simiki</span> <span class="n">init</span>
-</pre></div>
-
-
-<h3 id="create-a-new-wiki">Create a new wiki</h3>
-<div class="hlcode"><pre><span class="n">simiki</span> <span class="n">new</span> <span class="o">-</span><span class="n">t</span> <span class="s">&quot;Hello Simiki&quot;</span> <span class="o">-</span><span class="n">c</span> <span class="n">first</span><span class="o">-</span><span class="n">catetory</span>
-</pre></div>
-
-
-<h3 id="generate">Generate</h3>
-<div class="hlcode"><pre><span class="n">simiki</span> <span class="n">g</span>
-</pre></div>
-
-
-<h3 id="preview">Preview</h3>
-<div class="hlcode"><pre><span class="n">simiki</span> <span class="n">p</span> <span class="o">-</span><span class="n">w</span>
-</pre></div>
-
-
-<p>For more information, <code>simiki -h</code> or have a look at <a href="http://simiki.org">Simiki.org</a></p>
-<h2 id="others">Others</h2>
-<ul>
-<li><a href="http://simiki.org">simiki.org</a></li>
-<li><a href="https://github.com/tankywoo/simiki">https://github.com/tankywoo/simiki</a></li>
-<li>Email: <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#109;&#101;&#64;&#116;&#97;&#110;&#107;&#121;&#119;&#111;&#111;&#46;&#99;&#111;&#109;">&#109;&#101;&#64;&#116;&#97;&#110;&#107;&#121;&#119;&#111;&#111;&#46;&#99;&#111;&#109;</a></li>
-<li><a href="https://github.com/tankywoo/simiki/wiki/Simiki-Users">Simiki Users</a></li>
-</ul>
-<h2 id="license">License</h2>
-<p>The MIT License (MIT)</p>
-<p>Copyright (c) 2013 Tanky Woo</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy of<br />
-this software and associated documentation files (the "Software"), to deal in<br />
-the Software without restriction, including without limitation the rights to<br />
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of<br />
-the Software, and to permit persons to whom the Software is furnished to do so,<br />
-subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all<br />
-copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR<br />
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS<br />
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR<br />
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER<br />
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN<br />
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+<h1 id="_1">硬件介绍</h1>
+<p>N100是COOV转换器系列的基本形态，集成了一个USB A公与一个USB A母。可将互不兼容的主机与外设互相连接使用。</p>
+<h2 id="_2">已支持主机：</h2>
+<ol>
+<li>NS主机</li>
+<li>PS4主机 <em>3.0或更高版本固件</em></li>
+<li>Xbox One主机 <em>3.0或更高版本固件</em></li>
+</ol>
+<h2 id="_3">已支持外设：</h2>
+<ol>
+<li>NS Pro手柄</li>
+<li>PS4手柄</li>
+<li>Xbox One手柄</li>
+<li>PS3手柄</li>
+<li>XBOX360有线手柄</li>
+<li>其他第三方兼容手柄</li>
+<li>HID外设 <em>需配合 <a href="http://daringfireball.net/projects/markdown/">K4</a></em></li>
+</ol>
+<p><img alt="" src="N100/n100.png" /></p>
+<h1 id="_4">功能介绍</h1>
+<h2 id="_5">基本功能</h2>
+<p><a href="http://daringfireball.net/projects/markdown/">链接</a></p>
+<h2 id="_6">高级功能</h2>
+<p><a href="http://daringfireball.net/projects/markdown/">链接</a></p>
+<h2 id="ns">连接NS主机</h2>
+<h2 id="ps4">连接PS4主机</h2>
+<h2 id="xbox-one">连接Xbox One主机</h2>
+<h1 id="_7">其他信息</h1>
+<h2 id="n100ps4">老版本N100无法直接插入PS4的解决方法</h2>
+<p><a href="http://daringfireball.net/projects/markdown/">链接</a></p>
+<h2 id="_8">背光键盘</h2>
     </div>
     <div id="footer">
       <span>
         <p>Copyright © 2017 .
         Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.</p>
-        <p>Site Generated 2017-12-04 17:37:29</p>
+        <p>Site Generated 2017-12-04 18:08:42</p>
       </span>
     </div>
 
