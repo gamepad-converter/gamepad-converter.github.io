@@ -79,30 +79,32 @@
 </ul>
 </li>
 <li><a href="#_32">按键锁（默认关闭）</a><ul>
-<li><a href="#_33">开启按键锁</a></li>
-<li><a href="#_34">关闭按键锁</a></li>
-<li><a href="#_35">清除所有按键锁</a></li>
-<li><a href="#_36">支持的键位</a></li>
+<li><a href="#_33">开启按键的按键锁功能</a></li>
+<li><a href="#_34">关闭按键的按键锁功能</a></li>
+<li><a href="#_35">关闭所有按键的按键锁功能</a></li>
+<li><a href="#_36">锁定按键</a></li>
+<li><a href="#_37">解锁按键</a></li>
+<li><a href="#_38">支持的键位</a></li>
 </ul>
 </li>
-<li><a href="#_37">手柄震动开关及力度调整功能</a></li>
-<li><a href="#_38">校准功能</a><ul>
-<li><a href="#_39">校准</a></li>
-<li><a href="#_40">清除校准数据</a></li>
-<li><a href="#_41">使用建议</a></li>
+<li><a href="#_39">手柄震动开关及力度调整功能</a></li>
+<li><a href="#_40">校准功能</a><ul>
+<li><a href="#_41">校准</a></li>
+<li><a href="#_42">清除校准数据</a></li>
+<li><a href="#_43">使用建议</a></li>
 </ul>
 </li>
-<li><a href="#_42">其他事项</a></li>
+<li><a href="#_44">其他事项</a></li>
 </ul>
 </li>
-<li><a href="#_43">其他信息</a><ul>
-<li><a href="#_44">如何快速确认手柄是否被支持</a></li>
-<li><a href="#_45">如何恢复出厂设置</a></li>
+<li><a href="#_45">其他信息</a><ul>
+<li><a href="#_46">如何快速确认手柄是否被支持</a></li>
+<li><a href="#_47">如何恢复出厂设置</a></li>
 </ul>
 </li>
-<li><a href="#_46">固件</a><ul>
-<li><a href="#_47">下载</a></li>
-<li><a href="#_48">变更日志</a></li>
+<li><a href="#_48">固件</a><ul>
+<li><a href="#_49">下载</a></li>
+<li><a href="#_50">变更日志</a></li>
 </ul>
 </li>
 </ul>
@@ -153,7 +155,7 @@
 <p>在模拟U盘中，还有一个<code>data.bin</code>文件，这个文件存储着所有用户自定义参数。出厂状态下所有参数为默认值，当用户进入高级功能进行配置后，相关配置会被保存与此文件中。</p>
 <p>用户可以刷入官方提供的各种配置文件来快速提升操控体验，也可以将自己的配置文件分享给其他转换器用户。</p>
 <h3 id="ns"><strong>连接NS主机</strong></h3>
-<ol>
+<ul>
 <li>掌机模式：</li>
 <li>准备Type-C OTG转接头或线材</li>
 <li>将NS主机、OTG转接头或线材、N100及手柄依次连接</li>
@@ -161,7 +163,7 @@
 <li>底座模式：</li>
 <li>将底座、N100及手柄依次连接</li>
 <li>若非1.x版本固件，还需将NS主机中<code>Pro Controller Wired Communication</code>选项置为<code>ON</code></li>
-</ol>
+</ul>
 <h3 id="ps4"><strong>连接PS4主机</strong></h3>
 <ol>
 <li>更新N100固件至3.x或更高版本</li>
@@ -291,27 +293,28 @@
 </ul>
 <h3 id="_32"><strong>按键锁（默认关闭）</strong></h3>
 <p><em>（固件版本不小于 V3.4003）</em></p>
-<p>按键锁可以对选定的按键加锁。当按下一个加锁按键，按键被会锁定在按下状态，直至此按键被再次按下并松开。此功能可以实现无限长按压，也可以配合连发、一键连招实现无限自动操作。</p>
-<h5 id="_33"><strong>开启按键锁</strong></h5>
-<ol>
-<li>同时按下<code>HOME</code> + <code>十字键上</code>并松开，进入按键锁功能配置模式</li>
-<li>按住需要开启按键锁功能的按键，再按一下<code>中右键</code>，即可开启对应按键的按键锁功能</li>
-<li>按一下<code>HOME</code>键，退出配置模式</li>
-</ol>
-<h5 id="_34"><strong>关闭按键锁</strong></h5>
-<ol>
-<li>同时按下<code>HOME</code> + <code>十字键上</code>并松开，进入按键锁功能配置模式</li>
-<li>按住需要关闭按键锁功能的按键，再按一下<code>中左键</code>，即可关闭对应按键的按键锁功能</li>
-<li>按一下<code>HOME</code>键，退出配置模式</li>
-</ol>
-<h5 id="_35"><strong>清除所有按键锁</strong></h5>
-<ol>
-<li>同时按下<code>HOME</code> + <code>十字键上</code>并松开，进入按键锁功能配置模式</li>
-<li>按住<code>HOME</code>3秒钟，会自动清除所有已配置的按键锁功能，并自动退出配置模式</li>
-</ol>
-<h5 id="_36"><strong>支持的键位</strong></h5>
+<p>按键锁可以对选定的按键加锁。 <strong>当按下一个加锁按键，按键被会锁定在按下状态，直至此按键被再次按下并松开。</strong> 此功能可以实现无限长按压，也可以配合连发、一键连招实现无限自动操作。</p>
+<h5 id="_33"><strong>开启按键的按键锁功能</strong></h5>
+<p><em>（请不要在有按键被锁定的状态下进入配置模式）</em><br />
+1. 同时按下<code>HOME</code> + <code>十字键上</code>并松开，进入按键锁功能配置模式<br />
+2. 按住需要开启按键锁功能的按键，再按一下<code>中右键</code>，即可开启对应按键的按键锁功能<br />
+3. 按一下<code>HOME</code>键，退出配置模式</p>
+<h5 id="_34"><strong>关闭按键的按键锁功能</strong></h5>
+<p><em>（请不要在有按键被锁定的状态下进入配置模式）</em><br />
+1. 同时按下<code>HOME</code> + <code>十字键上</code>并松开，进入按键锁功能配置模式<br />
+2. 按住需要关闭按键锁功能的按键，再按一下<code>中左键</code>，即可关闭对应按键的按键锁功能<br />
+3. 按一下<code>HOME</code>键，退出配置模式</p>
+<h5 id="_35"><strong>关闭所有按键的按键锁功能</strong></h5>
+<p><em>（请不要在有按键被锁定的状态下进入配置模式）</em><br />
+1. 同时按下<code>HOME</code> + <code>十字键上</code>并松开，进入按键锁功能配置模式<br />
+2. 按住<code>HOME</code>3秒钟，会自动清除所有已配置的按键锁功能，并自动退出配置模式</p>
+<h5 id="_36"><strong>锁定按键</strong></h5>
+<p>按一下已开启按键锁功能的按键，此后按键被锁定</p>
+<h5 id="_37"><strong>解锁按键</strong></h5>
+<p>按一下已锁定的按键并松开，此后按键被解除锁定</p>
+<h5 id="_38"><strong>支持的键位</strong></h5>
 <p>除<code>HOME</code>、<code>中左键</code>、<code>中右键</code>及<code>摇杆</code>外的所有按键</p>
-<h3 id="_37"><strong>手柄震动开关及力度调整功能</strong></h3>
+<h3 id="_39"><strong>手柄震动开关及力度调整功能</strong></h3>
 <ol>
 <li>同时按下<code>HOME</code>键 + <code>中左键</code>并松开，进入震动配置模式</li>
 <li>按一下<code>十字方向键上</code>，提高震动力度</li>
@@ -319,38 +322,38 @@
 <li>按一下<code>HOME</code>键，退出配置模式</li>
 </ol>
 <p><em>DS3手柄无法调整震动强度，只有开关功能</em></p>
-<h3 id="_38"><strong>校准功能</strong></h3>
-<h5 id="_39"><strong>校准</strong></h5>
+<h3 id="_40"><strong>校准功能</strong></h3>
+<h5 id="_41"><strong>校准</strong></h5>
 <p>校准功能，可以在不增大死区的前提下，解决部分手柄出现的摇杆漂移问题。<br />
 1. 同时按下<code>HOME</code> + <code>中右键</code>并松开，进入校准配置模式<br />
 2. 尝试转动两个摇杆，直到手柄停止震动<br />
 3. 停止震动后，先松开两个摇杆，再按一下<code>HOME</code>键<br />
 4. 等待1秒后，自动退出校准模式，转换器亮绿灯表示校准成功，红灯表示校准失败</p>
-<h5 id="_40"><strong>清除校准数据</strong></h5>
+<h5 id="_42"><strong>清除校准数据</strong></h5>
 <ol>
 <li>同时按下<code>HOME</code> + <code>中右键</code>并松开，进入校准配置模式</li>
 <li>按下<code>HOME</code>键并保持3秒，会清除所有校准参数，并退出配置模式</li>
 </ol>
-<h5 id="_41"><strong>使用建议</strong></h5>
+<h5 id="_43"><strong>使用建议</strong></h5>
 <p>大部分原装手柄无需校准，如果出现摇杆漂移，再进行校准。</p>
-<h3 id="_42"><strong>其他事项</strong></h3>
+<h3 id="_44"><strong>其他事项</strong></h3>
 <ol>
 <li>在高级功能配置过程中，每次有效操作都会触发一次手柄震动</li>
 <li>连发频率调整将以红色LED灯闪烁频率予以提示</li>
 <li>默认通过双击<code>HOME</code>键实现对<code>Capture</code>（NS手柄）、<code>触摸板</code>（DS4手柄）的模拟</li>
 <li>在使用V2.00以上版本，请将"Pro Controller Wired Communication" 设置为 ON</li>
 </ol>
-<h1 id="_43"><strong>其他信息</strong></h1>
-<h3 id="_44"><strong>如何快速确认手柄是否被支持</strong></h3>
+<h1 id="_45"><strong>其他信息</strong></h1>
+<h3 id="_46"><strong>如何快速确认手柄是否被支持</strong></h3>
 <ul>
 <li>尝试进入<a href="../软件功能/converter_advanced.html">高级功能</a>，观察手柄是否会震动已经N100指示灯是否有反应。比如：同时按下<code>Home</code>+<code>中左</code>键，进入震动强度调整功能，再按几下方向键上和方向键下，如果手柄被支持，此时该手柄会震动，N100指示灯会闪烁。</li>
 </ul>
-<h3 id="_45"><strong>如何恢复出厂设置</strong></h3>
+<h3 id="_47"><strong>如何恢复出厂设置</strong></h3>
 <ul>
 <li>如无特殊需求，建议直接下载最新固件，并刷入其中的<code>firmware.bin</code>和<code>data.bin（出厂版）</code></li>
 </ul>
-<h1 id="_46"><strong>固件</strong></h1>
-<h3 id="_47"><strong>下载</strong></h3>
+<h1 id="_48"><strong>固件</strong></h1>
+<h3 id="_49"><strong>下载</strong></h3>
 <ul>
 <li><a href="N100/COOV N100 &amp; N200 V3.4002 20171226.zip">V3.4002</a></li>
 <li><a href="N100/COOV N100 &amp; N200 V3.4 20171212.zip">V3.4</a></li>
@@ -358,7 +361,7 @@
 <li><a href="N100/COOV N100 V2.4 20170909.zip">V2.4</a></li>
 <li><a href="N100/COOV N100 V1.6 20171201.zip">V1.6</a></li>
 </ul>
-<h3 id="_48"><strong>变更日志</strong></h3>
+<h3 id="_50"><strong>变更日志</strong></h3>
 <div class="hlcode"><pre><span class="mi">2017</span><span class="err">年</span><span class="mi">12</span><span class="err">月</span><span class="mi">12</span><span class="err">日（</span><span class="n">V3</span><span class="mf">.4</span><span class="err">）</span>
 <span class="mf">1.</span> <span class="err">在按键映射配置过程中，过滤掉鼠标移动误触</span>
 <span class="mf">2.</span> <span class="n">PRO</span><span class="err">手柄的支持优化，主要解决一些输入冲突</span>
@@ -413,9 +416,9 @@
     </div>
     <div id="footer">
       <span>
-        <p>Copyright © 2017 .
+        <p>Copyright © 2018 .
         Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.</p>
-        <p>Site Generated 2017-12-28 23:58:34</p>
+        <p>Site Generated 2018-01-02 15:25:38</p>
       </span>
     </div>
 
