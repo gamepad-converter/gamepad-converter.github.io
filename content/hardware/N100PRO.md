@@ -8,10 +8,17 @@ date: 2018-2-28 15:07:18
 # **硬件介绍**
 N100 Pro在[N100](N100.html)基础上增加了对蓝牙狗的支持，不仅拥有N100所有功能，还能通过蓝牙狗连接蓝牙手柄。
 
+### **已支持主机**
+* Nintendo Switch
+* PS4 系列
+* Xbox One 系列
+* 安卓系统 （固件版本不小于1.1）
+* Windows系统 （固件版本不小于1.1）
+
 ### **已支持蓝牙外设**
 * PS4手柄 （支持体感、支持震动）
 * NS Pro手柄 （支持震动、暂不支持体感）
-* Xbox One S手柄 （暂不支持震动）
+* Xbox One S手柄 （支持震动, 固件版本不小于1.1）
 * JoyCon （暂不支持体感及震动，不支持两个同时连接）
 * Wii U Pro （支持震动）
 
@@ -21,5 +28,34 @@ N100 Pro在[N100](N100.html)基础上增加了对蓝牙狗的支持，不仅拥�
 # **连接教程**
 [视频](http://video.realxen.com/mycoov/n100pro.mp4)
 
-# **功能教程**
+# **功能介绍**
+### **蓝牙参数配置**
+N100 PRO的info.txt文件内容如下：
+```
+Product    : N100 Pro
+Product ID : C90A5E9AE39939E3EF12AF4218E06ED5
+Version    : 1.1
+Power On Scan Time [0, 30](Sec)             : 10
+'Home' Hold Time To Disconnect [0, 9](Sec)  : 0
+Auto Disconnect Time [0, 99](Min)           : 15
+```
+* `Power On Scan Time [0, 30](Sec)` 用于设置N100连接主机后启用配对模式的时间。若设置成0，表示关闭配对功能；默认值为10，表示有10秒的配对时间。
+* `'Home' Hold Time To Disconnect [0, 9](Sec)` 用于设置`Home`键长按断开连接的时间。默认为0，表示关闭此功能；若设置成5，表示`Home`键长按5秒后断开连接。
+* `Auto Disconnect Time [0, 99](Min)` 用于设置手柄闲置时自动断开连接的时间。若设置成0，表示关闭此功能；默认为15，表示手柄闲置15分钟后，自动断开连接。
+
+### **其他同N100**
 请参看[N100](N100.html)
+
+# **固件**
+### **下载**
+* [V1.1](N100PRO/COOV N100 PRO V1.1 20180316.zip)
+### **变更日志**
+```
+V1.1
+1. 支持Windows系统（Xinput）
+2. 支持Android系统（Xinput）
+3. 支持蓝牙连接Xbox One S手柄时的震动功能
+4. 支持pro手柄的摇杆校准功能
+5. 不再使X1手柄在连接后自动震动
+6. 降低高级功能配置时的震动强度
+```
