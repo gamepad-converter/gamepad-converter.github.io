@@ -33,10 +33,14 @@
 </ul>
 </li>
 <li><a href="#_5">连接教程</a></li>
-<li><a href="#_6">功能教程</a></li>
-<li><a href="#_7">固件</a><ul>
-<li><a href="#_8">下载</a></li>
-<li><a href="#_9">变更日志</a></li>
+<li><a href="#_6">功能介绍</a><ul>
+<li><a href="#_7">蓝牙参数配置</a></li>
+<li><a href="#n100">其他同N100</a></li>
+</ul>
+</li>
+<li><a href="#_8">固件</a><ul>
+<li><a href="#_9">下载</a></li>
+<li><a href="#_10">变更日志</a></li>
 </ul>
 </li>
 </ul>
@@ -63,14 +67,31 @@
 <p>蓝牙功能与键鼠功能无法同时使用。若要使用键鼠，请先移除蓝牙狗。</p>
 <h1 id="_5"><strong>连接教程</strong></h1>
 <p><a href="http://video.realxen.com/mycoov/n100pro.mp4">视频</a></p>
-<h1 id="_6"><strong>功能教程</strong></h1>
+<h1 id="_6"><strong>功能介绍</strong></h1>
+<h3 id="_7"><strong>蓝牙参数配置</strong></h3>
+<p>N100 PRO的info.txt文件内容如下：</p>
+<div class="hlcode"><pre><span class="n">Product</span>    <span class="o">:</span> <span class="n">N100</span> <span class="n">Pro</span>
+<span class="n">Product</span> <span class="n">ID</span> <span class="o">:</span> <span class="n">C90A5E9AE39939E3EF12AF4218E06ED5</span>
+<span class="n">Version</span>    <span class="o">:</span> <span class="mf">1.1</span>
+<span class="n">Power</span> <span class="n">On</span> <span class="n">Scan</span> <span class="n">Time</span> <span class="o">[</span><span class="mi">0</span><span class="o">,</span> <span class="mi">30</span><span class="o">](</span><span class="n">Sec</span><span class="o">)</span>             <span class="o">:</span> <span class="mi">10</span>
+<span class="s1">&#39;Home&#39;</span> <span class="n">Hold</span> <span class="n">Time</span> <span class="n">To</span> <span class="n">Disconnect</span> <span class="o">[</span><span class="mi">0</span><span class="o">,</span> <span class="mi">9</span><span class="o">](</span><span class="n">Sec</span><span class="o">)</span>  <span class="o">:</span> <span class="mi">0</span>
+<span class="n">Auto</span> <span class="n">Disconnect</span> <span class="n">Time</span> <span class="o">[</span><span class="mi">0</span><span class="o">,</span> <span class="mi">99</span><span class="o">](</span><span class="n">Min</span><span class="o">)</span>           <span class="o">:</span> <span class="mi">15</span>
+</pre></div>
+
+
+<ul>
+<li><code>Power On Scan Time [0, 30](Sec)</code> 用于设置N100连接主机后启用配对模式的时间，若设置成0，则关闭配对功能，默认值为10，表示有10秒的配对时间。</li>
+<li><code>'Home' Hold Time To Disconnect [0, 9](Sec)</code> 用于设置<code>Home</code>键长按断开连接的时间，默认为0，关闭此功能，若设置成5，表示长按3秒断开连接。</li>
+<li><code>Auto Disconnect Time [0, 99](Min)</code> 用于设置手柄闲置时自动断开连接的时间，默认为15，表示手柄闲置15分钟后，自动断开连接，若设置成0，表示关闭此功能。</li>
+</ul>
+<h3 id="n100"><strong>其他同N100</strong></h3>
 <p>请参看<a href="N100.html">N100</a></p>
-<h1 id="_7"><strong>固件</strong></h1>
-<h3 id="_8"><strong>下载</strong></h3>
+<h1 id="_8"><strong>固件</strong></h1>
+<h3 id="_9"><strong>下载</strong></h3>
 <ul>
 <li><a href="N100PRO/COOV N100 PRO V1.1 20180315.zip">V1.1</a></li>
 </ul>
-<h3 id="_9"><strong>变更日志</strong></h3>
+<h3 id="_10"><strong>变更日志</strong></h3>
 <div class="hlcode"><pre><span class="n">V1</span><span class="mf">.1</span>
 <span class="mf">1.</span> <span class="err">支持</span><span class="n">Windows</span><span class="err">系统（</span><span class="n">Xinput</span><span class="err">）</span>
 <span class="mf">2.</span> <span class="err">支持</span><span class="n">Android</span><span class="err">系统（</span><span class="n">Xinput</span><span class="err">）</span>
@@ -84,7 +105,7 @@
       <span>
         <p>Copyright © 2018 .
         Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.</p>
-        <p>Site Generated 2018-03-15 22:11:43</p>
+        <p>Site Generated 2018-03-16 08:14:09</p>
       </span>
     </div>
 
