@@ -33,14 +33,21 @@
 </ul>
 </li>
 <li><a href="#_5">连接教程</a></li>
-<li><a href="#_6">功能介绍</a><ul>
-<li><a href="#_7">蓝牙参数配置</a></li>
+<li><a href="#_6">连接说明</a><ul>
+<li><a href="#_7">配对</a></li>
+<li><a href="#_8">自动连接</a></li>
+<li><a href="#_9">闲置自动关机</a></li>
+<li><a href="#_10">手动关机（出厂默认关闭）</a></li>
+</ul>
+</li>
+<li><a href="#_11">功能介绍</a><ul>
+<li><a href="#_12">蓝牙参数配置</a></li>
 <li><a href="#n100">其他同N100</a></li>
 </ul>
 </li>
-<li><a href="#_8">固件</a><ul>
-<li><a href="#_9">下载</a></li>
-<li><a href="#_10">变更日志</a></li>
+<li><a href="#_13">固件</a><ul>
+<li><a href="#_14">下载</a></li>
+<li><a href="#_15">变更日志</a></li>
 </ul>
 </li>
 </ul>
@@ -67,8 +74,17 @@
 <p>蓝牙功能与键鼠功能无法同时使用。若要使用键鼠，请先移除蓝牙狗。</p>
 <h1 id="_5"><strong>连接教程</strong></h1>
 <p><a href="http://video.realxen.com/mycoov/n100pro.mp4">视频</a></p>
-<h1 id="_6"><strong>功能介绍</strong></h1>
-<h3 id="_7"><strong>蓝牙参数配置</strong></h3>
+<h1 id="_6"><strong>连接说明</strong></h1>
+<h3 id="_7"><strong>配对</strong></h3>
+<p>N100 PRO在连接主机后进入配对模式，并维持10秒（默认，可在info.txt中修改），用户可在此期间完成配对。建议先让手柄进入配对模式，然后将N100 PRO连上主机。</p>
+<h3 id="_8"><strong>自动连接</strong></h3>
+<p>N100 PRO在连接主机后10秒（默认，可在info.txt中修改）后，会退出配对模式，在退出配对模式后，可以支持已配对手柄的自动连接。</p>
+<h3 id="_9"><strong>闲置自动关机</strong></h3>
+<p>已连接的蓝牙手柄，如果连续闲置超过15分钟（默认，可在info.txt中修改），会自动断开此手柄的连接，该手柄会自动关机。</p>
+<h3 id="_10"><strong>手动关机（出厂默认关闭）</strong></h3>
+<p>N100 PRO支持通过长按<code>Home</code>键断开蓝牙连接。此功能默认关闭，用户可以在info.txt中相关参数来开启此功能。</p>
+<h1 id="_11"><strong>功能介绍</strong></h1>
+<h3 id="_12"><strong>蓝牙参数配置</strong></h3>
 <p>N100 PRO的info.txt文件内容如下：</p>
 <div class="hlcode"><pre><span class="n">Product</span>    <span class="o">:</span> <span class="n">N100</span> <span class="n">Pro</span>
 <span class="n">Product</span> <span class="n">ID</span> <span class="o">:</span> <span class="n">C90A5E9AE39939E3EF12AF4218E06ED5</span>
@@ -86,12 +102,12 @@
 </ul>
 <h3 id="n100"><strong>其他同N100</strong></h3>
 <p>请参看<a href="N100.html">N100</a></p>
-<h1 id="_8"><strong>固件</strong></h1>
-<h3 id="_9"><strong>下载</strong></h3>
+<h1 id="_13"><strong>固件</strong></h1>
+<h3 id="_14"><strong>下载</strong></h3>
 <ul>
 <li><a href="N100PRO/COOV N100 PRO V1.1 20180316.zip">V1.1</a></li>
 </ul>
-<h3 id="_10"><strong>变更日志</strong></h3>
+<h3 id="_15"><strong>变更日志</strong></h3>
 <div class="hlcode"><pre><span class="n">V1</span><span class="mf">.1</span>
 <span class="mf">1.</span> <span class="err">支持</span><span class="n">Windows</span><span class="err">系统（</span><span class="n">Xinput</span><span class="err">）</span>
 <span class="mf">2.</span> <span class="err">支持</span><span class="n">Android</span><span class="err">系统（</span><span class="n">Xinput</span><span class="err">）</span>
@@ -105,7 +121,7 @@
       <span>
         <p>Copyright © 2018 .
         Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.</p>
-        <p>Site Generated 2018-03-16 18:25:36</p>
+        <p>Site Generated 2018-03-22 10:52:26</p>
       </span>
     </div>
 
