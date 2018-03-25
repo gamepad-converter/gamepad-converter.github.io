@@ -1,0 +1,444 @@
+<!-- Originally written by Milan Peparsky -->
+<!-- Modified by Nathan Seidle -->
+<!-- Demonstrates how to connect hardware to html -->
+<!-- You may find references to PicoDos in this code; was what this code was originally written for -->
+<html>
+<head>
+<title>Example control of HID with webpage</title>
+</head>
+    <!-- UI elements and control -->
+    <!-- jQuery slider bar -->
+
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <!-- font too small: link rel="stylesheet" href="./style.css" / -->
+    <style>
+        .ui-menu { width: 180px;
+            font-weight: regular;
+        }
+        .ui-progressbar {
+            position: relative;
+        }
+        .progress-labelA {
+            position: absolute;
+            left: 50%;
+            top: 4px;
+            font-weight: bold;
+            text-shadow: 1px 1px 0 #fff;
+        }
+        .progress-labelB {
+            position: absolute;
+            left: 50%;
+            top: 4px;
+            font-weight: bold;
+            text-shadow: 1px 1px 0 #fff;
+        }
+        .progress-labelSlider {
+            position: absolute;
+            left: 50%;
+            top: 4px;
+            font-weight: bold;
+            text-shadow: 1px 1px 0 #fff;
+        }
+    </style>
+
+    <script>
+
+    <!-- Channel 1 vertical slider -->
+    var channel1Data; 
+        $(function() {
+            $( "#sliderChannel1" ).slider({
+                orientation: "vertical",
+                range: "min",
+                min: 0,
+                max: 100,
+                value: 60,
+                slide: function( event, ui ) {
+                $( "#amount" ).val( ui.value );
+                channel1Data = ui.value;
+                readSlider(channel1Data, 1);
+        	}
+        });
+        $( "#amount" ).val( $( "#sliderChannel1" ).slider( "value" ) );
+        });
+
+    <!-- Channel 2 vertical slider -->
+    var channel2Data; 
+        $(function() {
+            $( "#sliderChannel2" ).slider({
+                orientation: "vertical",
+                range: "min",
+                min: 0,
+                max: 100,
+                value: 60,
+                slide: function( event, ui ) {
+                $( "#amount" ).val( ui.value );
+                channel2Data = ui.value;
+                readSlider(channel2Data, 2);
+        	}
+        });
+        $( "#amount" ).val( $( "#sliderChannel2" ).slider( "value" ) );
+        });
+
+        <!-- sensor data progress bars -->
+
+        <!-- channel A sensor data progress bar -->
+        $(function() {
+            var progressbarA = $( "#progressbarA" ),
+            progressLabelA = $( ".progress-labelA" );
+            progressbarA.progressbar({
+                value: false,
+                change: function() {
+                    progressLabelA.text( progressbarA.progressbar( "value" ) + ": A scaled 0-100" );
+                },
+                complete: function() {
+                progressLabelA.text( "Complete!" );
+            }
+        });
+        function progressA() {  
+			var val = progressbarA.progressbar( "value" ) || 0;
+			if (deviceOpen == true) { 
+			   progressbarA.progressbar( "value", valueA );
+			}
+			if ( val < 99 ) {
+				setTimeout( progressA, 100 );
+			}
+        }
+        setTimeout( progressA, 3000 );
+        });
+
+        <!-- channel B sensor data progress bar -->
+        $(function() {
+            var progressbarB = $( "#progressbarB" ),
+            progressLabelB = $( ".progress-labelB" );
+            progressbarB.progressbar({
+                value: false,
+                change: function() {
+                    progressLabelB.text( progressbarB.progressbar( "value" ) + ": B scaled 0-100" );
+                },
+                complete: function() {
+                progressLabelB.text( "Complete!" );
+            }
+        });
+        function progressB() {  
+			var val = progressbarB.progressbar( "value" ) || 0;
+			if (deviceOpen == true) { 
+			   progressbarB.progressbar( "value", valueB );
+			}
+			if ( val < 99 ) {
+				setTimeout( progressB, 100 );
+			}
+        }
+        setTimeout( progressB, 3000 );
+        });
+        
+		<!-- channel Slider sensor data progress bar -->
+        $(function() {
+            var progressbarSlider= $( "#progressbarSlider" ),
+            progressLabelSlider = $( ".progress-labelSlider" );
+            progressbarSlider.progressbar({
+                value: false,
+                change: function() {
+                    progressLabelSlider.text( progressbarSlider.progressbar( "value" ) + ": Slider scaled 0-100" );
+                },
+                complete: function() {
+                progressLabelSlider.text( "Complete!" );
+            }
+        });
+        function progressSlider() {  
+			var val = progressbarSlider.progressbar( "value" ) || 0;
+			if (deviceOpen == true) { 
+			   progressbarSlider.progressbar( "value", valueSlider );
+			}
+			if ( val < 99 ) {
+				setTimeout( progressSlider, 100 );
+			}
+        }
+        setTimeout( progressSlider, 3000 );
+        });
+
+
+    </script>
+</head>
+<body>
+    <p>
+    <label for="amount">Slider 1 Value:</label>
+    <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
+    </p>
+    <div id="sliderChannel1" style="height: 120px;"></div>
+    <div id="sliderChannel2" style="height: 120px;"></div>
+    <div id="progressbarA"><div class="progress-labelA">Channel A</div></div>
+    <div id="progressbarB"><div class="progress-labelB">Channel B</div></div>
+    <div id="progressbarSlider"><div class="progress-labelSlider">Channel Slider</div></div>
+</body>
+
+    <script type="text/javascript">
+        // constants 
+        var hidapiPluginConstants = {
+            TeensyVendorID:  0x16C0,
+            TeensyProductID: 0x0486
+            <!-- These values come from usb_private.h -->
+            <!-- Can be modified to work with your own hardware -->
+        };
+        // "globals" 
+        var plugin;
+		var result;
+		var path;
+        var device = null;
+        var deviceUnplugged = false;
+        var deviceOpen = false; 
+        var motorOutputReport;
+		var channel1Value = "00";
+		var channel2Value = "00";
+		var channel3Value = "00";
+		var channel4Value = "00";
+ 
+        function pluginLoaded() {
+            pluginDetect(); 
+			console.log("Plugin loaded!");
+            hidScan();
+        }
+
+        // function pluginDetect() install, detect plugin 
+        var FireBreath;
+        var el = ""; 
+        var mimeType = "application/x-hidapibrowserplugin";
+        var name = "hidapiBrowserPlugin";
+
+        function pluginDetect() {
+            if (typeof FireBreath === 'undefined') {
+               FireBreath = { };
+               FireBreath.pluginDefs = { };
+
+			if (typeof(navigator.plugins[name]) != "undefined") {
+				var re = /([0-9.]+)\.dll/; // look for the version at the end of the filename, before dll
+
+				// Get the filename
+				var filename = navigator.plugins[name].filename;
+				// Search for the version
+				var fnd;
+				fnd = re.exec(filename);
+				if (fnd === null) {// no version found
+					return true; // plugin installed, unknown version
+				} 
+				else {
+					return fnd[1]; // plugin installed, returning version
+				}
+
+				} // end if typeof(navigator.plugins[name]) != "undefined" 
+				else { //	else not installed; install it now: 
+					alert("plugin not installed. "); 
+				}
+            } // end if typeof FireBreath === 'undefined'
+        } // end function pluginDetect() 
+
+        /*********************************************
+		This is the only part of the file which changes
+		for each plugin, when generated by CMake.
+ 
+		Here the data for all the plugins is defined
+		- To support multiple plugins with the same
+			install script, add additional entries
+		- To support one plugin with multiple mime-
+			types, pretend that it's a second plugin =]
+		*********************************************/
+
+		//Scan the list of USB devices looking for Scratch compatible boards
+        function hidScan() {
+            plugin = document.getElementById("hidapiPlugin");
+            result = plugin.hid_enumerate();
+
+			for (var i=0; i<result.length; i++) {
+				if ((result[i]["vendor_id"] == hidapiPluginConstants.TeensyVendorID) && (result[i]["product_id"] == hidapiPluginConstants.TeensyProductID) )	{
+					alert("Found Teensy! Welcome to the SparkFun HID Demo.");
+					path = result[i]["path"];
+					break;
+				}
+			}
+			if (typeof path == "undefined") {
+				deviceOpen = false; 
+				alert("Device not found");
+				return;
+			}
+			if (deviceOpen == false) { 
+				device = plugin.hid_open_path(path);
+				if (device == null) {
+					alert("Error opening device");
+					deviceOpen = false; 
+					return;
+				}
+				else {
+					deviceOpen = true;
+					deviceUnplugged = false;
+					setTimeout(monitorUSBHID, 100);
+					console.log("hidScan: Found USB device");
+				}
+			}
+			else {
+				console.log("hidScan: USB device online");
+			}
+		} //end hidScan()
+
+        function monitorUSBHID() { 
+			if (device != null) { // device enumerated, opened
+				hidPicoDosReadData(); //Parse incoming frame
+			}
+			else if (deviceUnplugged == true) { // unplugged 
+				result = null;
+				result = plugin.hid_enumerate();
+				if (result != null) { 
+					// plugged back in? finish hidScan():  this needs some work still
+					for (var i=0; i<result.length; i++) {
+						if ( (result[i]["vendor_id"] == hidapiPluginConstants.TeensyVendorID) && (result[i]["product_id"] == hidapiPluginConstants.TeensyProductID) ) {
+							path = result[i]["path"];
+							if (typeof path == "undefined") {
+								deviceOpen = false; 
+								alert("Device not found");
+							}
+							if (deviceOpen == false) { 
+								device = plugin.hid_open_path(path);
+								if (device == null) {
+									alert("Error opening device");
+									deviceOpen = false; 
+								}
+								else {
+									deviceOpen = true;
+									deviceUnplugged = false;
+									setTimeout(monitorUSBHID, 100); 
+									alert("monitorUSBHID: Found HID device");
+								}
+							}
+							else {
+								alert("Device re-opened");
+							}
+							break;
+						}
+					}
+				}  //  end  if (result != null) 
+			}	 //  end  else if (deviceUnplugged == true) 
+			setTimeout(monitorUSBHID, 100); 
+        } //end monitorUSBHID
+
+        function readSlider(sliderValue, channelNumber) {
+            var channelValue = sliderValue;
+			
+			//Convert the slider scale (0-100) to output channels (0 to 0-255)
+            //channelValue = channelValue * 2.55; 
+			//console.log(sliderValue + ' channelValue:' + channelValue);
+			
+			channelValue = Math.ceil(channelValue); //Decimals cause the toString(16) function heartburn. Probably a better way to do this...
+			
+            var raw = channelValue.toString(16); //Convert int to 2 HEX values
+			if(raw.length < 2) raw = '0' + raw; //Force string to be two bytes long
+			
+			if(channelNumber == 1) channel1Value = raw;
+			if(channelNumber == 2) channel2Value = raw;
+			if(channelNumber == 3) channel3Value = raw;
+			if(channelNumber == 4) channel4Value = raw;
+			
+			var sendToPicoBoard = "0000" + channel1Value[0] + channel1Value[1] + channel2Value[0] + channel2Value[1] + channel3Value[0] + channel3Value[1] + channel4Value[0] + channel4Value[1] + "0000000000000000000000";
+
+            var mONResult = device.hid_write(sendToPicoBoard);
+			if(mONResult != 17) {
+				console.log('HID Error: ' + mONResult);
+			}
+        }
+
+        //Set channel 1 to the max (255) value
+		function hidChan1ON() {
+			var sendToPicoBoard = "0000FF0000000000000000000000000000";
+			var mONResult = device.hid_write(sendToPicoBoard); 
+        }
+
+        function hidChan1OFF() {
+			var sendToPicoBoard = "0000000000000000000000000000000000";
+			var mONResult = device.hid_write(sendToPicoBoard); 
+        }
+
+        //Grab the incoming frame and parse it into individual progress bars
+		function hidPicoDosReadData() {
+
+            var sD = device.hid_read(65); //Grab any one of the incoming sensor reading frames
+			//console.log('sd:' + sD);
+
+            if (deviceUnplugged == false && sD == "") {  //If nothing is detected, close down port
+               console.log("Device unplugged");
+               closeDevice();
+               deviceUnplugged = true;
+               setTimeout(monitorUSBHID, 100);
+			   return;
+            }
+			
+            var rawA = ""; 
+			var rawB = "";
+			var rawC = "";
+			var rawD = "";
+			var rawSlider = "";
+			var rawLight = "";
+			var rawSound = "";
+			var rawButton = "";
+			
+            //Break frame into strings of of four letters
+			rawA = sD[0] + sD[1] + sD[2] + sD[3];
+            rawB = sD[4] + sD[5] + sD[6] + sD[7];
+            rawC = sD[8] + sD[9] + sD[10] + sD[11];
+            rawD = sD[12] + sD[13] + sD[14] + sD[15];
+            rawSlider = sD[16] + sD[17] + sD[18] + sD[19];
+            rawLight = sD[20] + sD[21] + sD[22] + sD[23];
+            rawSound = sD[24] + sD[25] + sD[26] + sD[27];
+            rawButton = sD[28] + sD[29] + sD[30] + sD[31];
+
+			//Each four letter group is then turned into a 16 bit value
+			//That value is then ratio converted and limited in convertReading
+			valueA = convertReading(rawA);
+			valueB = convertReading(rawB);
+			valueC = convertReading(rawC);
+			valueD = convertReading(rawD);
+			valueSlider = convertReading(rawSlider);
+			valueLight = convertReading(rawLight);
+			valueSound = convertReading(rawSound);
+			valueButton = convertReading(rawButton);
+        }
+		
+		//Takes a four letter string, converts to an int,
+		//converts to correct ratio
+		//Then does so limit checking
+		function convertReading(readingAmt) {
+			//16 bit ratio to zero to 100: valueA / 100 = trimPot / 1024
+			var cleanValue = parseInt(readingAmt, 16) / 1024 * 100;
+			
+			cleanValue = Math.ceil(cleanValue); //Remove decimal portion from number
+			
+			if (cleanValue >= 99) cleanValue = 98; //Status bars ignore numbers above 98
+			if (cleanValue < 2) cleanValue = 0; //Small correction
+			
+			return(cleanValue);
+		}
+
+        function closeDevice() { // works 
+			if (device) {
+				//hidMotorOFF();
+				device.close(device);
+				device = null;
+				deviceOpen = false;
+				console.log("HID device closed");
+			}
+        }
+        
+    </script>
+    <script>
+        pluginLoaded();  //  enter js: detect if plugin present. 
+    </script>
+<object id="hidapiPlugin" type="application/x-hidapibrowserplugin" width="300" height="300">
+    <param name="onload" value="pluginLoaded" />
+</object><br />
+
+<a href="#" onclick="javascript:hidScan()">HID Scan</a> <br />
+<a href="#" onclick="javascript:readSensorsDisplayData()">Read Sensors</a><br/>
+<a href="#" onclick="javascript:hidChan1ON()">Chan1 ON</a><br/>
+<a href="#" onclick="javascript:hidChan1OFF()">Chan1 OFF</a><br/>
+<a href="#" onclick="javascript:closeDevice()">Close Device</a><br/>
+</body>
+</html>
