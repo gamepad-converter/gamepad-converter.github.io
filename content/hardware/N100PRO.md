@@ -8,17 +8,19 @@ date: 2018-2-28 15:07:18
 # **硬件介绍**
 N100 Pro在[N100](N100.html)基础上增加了对蓝牙狗的支持，不仅拥有N100所有功能，还能通过蓝牙狗连接蓝牙手柄。
 
-### **已支持主机**
+### **已支持主机 （固件版本1.3）**
 * Nintendo Switch
-* PS4 系列
-* Xbox One 系列
-* 安卓系统 （固件版本不小于1.1）
-* Windows系统 （固件版本不小于1.1）
+* PS4 全系列  
+* Xbox One 全系列
+* Windows 10
+* Windows 7 （需专用固件[V1.3B](N100PRO/COOV N100 PRO V1.3 20180327.zip)）
+* 安卓系统 （部分安卓定制系统，精简了xinput驱动，无法即插即用，此情况下可配合[usb/bt joystick](N100/usb-bt_joystick.zip)解决）
+* Linux系统
 
-### **已支持蓝牙外设**
+### **已支持蓝牙外设 （固件版本1.3）**
 * PS4手柄 （支持体感、支持震动）
 * NS Pro手柄 （支持震动、暂不支持体感）
-* Xbox One S手柄 （支持震动, 固件版本不小于1.1）
+* Xbox One S手柄 （支持震动）
 * JoyCon （暂不支持体感及震动，不支持两个同时连接）
 * Wii U Pro （支持震动）
 
@@ -61,9 +63,16 @@ Auto Disconnect Time [0, 99](Min)           : 15
 
 # **固件**
 ### **下载**
+* [V1.3](N100PRO/COOV N100 PRO V1.3 20180327.zip)
 * [V1.1](N100PRO/COOV N100 PRO V1.1 20180316.zip)
 ### **变更日志**
 ```
+2018年3月27日（V1.3）
+1. 修复某些情况下HID数据被忽略的BUG
+2. 修复Xbox One S手柄无法作为引导手柄使用的BUG
+3. 修复Pro手柄无法通过蓝牙自动重连的BUG
+4. 修复蓝牙连接Xbox One S手柄时可能产生的误触情况
+
 V1.1
 1. 支持Windows系统（Xinput）
 2. 支持Android系统（Xinput）
