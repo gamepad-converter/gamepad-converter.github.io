@@ -13,8 +13,8 @@ N100 Pro在[N100](N100.html)基础上增加了对蓝牙狗的支持，不仅拥�
 * PS4 全系列  
 * Xbox One 全系列
 * Windows 10
-* Windows 7 （需专用固件[V1.3B](N100PRO/COOV N100 PRO V1.3 20180327.zip)）
-* 安卓系统 （部分安卓定制系统，精简了xinput驱动，无法即插即用，此情况下可配合[usb/bt joystick](N100/usb-bt_joystick.zip)解决）
+* Windows 7 （需专用固件[V5.5B](N100/COOV N100  V5.5 20180327.zip)）
+* 安卓系统 （部分安卓定制系统，精简了xinput驱动，无法即插即用，此情况下可配合[usb/bt joystick](https://gamepad-converter.mycoov.com/viewtopic.php?f=4&p=23)解决）
 * Linux系统
 
 ### **已支持蓝牙外设 （固件版本1.3）**
@@ -28,7 +28,7 @@ N100 Pro在[N100](N100.html)基础上增加了对蓝牙狗的支持，不仅拥�
 蓝牙功能与键鼠功能无法同时使用。若要使用键鼠，请先移除蓝牙狗。
 
 # **连接教程**
-[视频](http://video.realxen.com/mycoov/n100pro.mp4)
+[视频](http://www.mycoov.com/zh/Video/)
 
 # **连接说明**
 ### **配对**
