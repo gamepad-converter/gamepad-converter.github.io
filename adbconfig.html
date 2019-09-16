@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.5, minimum-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+	<meta charset="utf-8">
+	<title>键鼠功能配置工具</title>
+</head>
+<body>
+	<script>
+		function getQueryVariable(variable) {
+			var query = window.location.search.substring(1);
+			var vars = query.split("?");
+			for (var i = 0; i < vars.length; i++) {
+				var pair = vars[i].split("=");
+				if(pair[0] == variable){return pair[1];}
+			}
+			return(null);
+		}
+
+		function common_onchange(v) {
+			document.getElementById(v.dataset.band).value = v.value;
+			if (v.dataset.width == 1) {
+				console.log("hJiR" + "B" + (Number(v.dataset.addr) + 0x48).toString(16) + "=" + Number(v.value).toString(16) + "mUZg");
+			}
+			else if (v.dataset.width == 2) {
+				console.log("hJiR" + "H" + (Number(v.dataset.addr) + 0x48).toString(16) + "=" + Number(v.value).toString(16) + "mUZg");
+			}
+			else if (v.dataset.width == 4) {
+				console.log("hJiR" + "W" + (Number(v.dataset.addr) + 0x48).toString(16) + "=" + Number(v.value).toString(16) + "mUZg");
+			}
+		}
+
+		function common_onclick(v, is_add) {
+			console.log("common_onclick");
+			baud_id = document.getElementById(v.dataset.band);
+			if (Number(is_add) && (Number(baud_id.value) < Number(baud_id.max)))
+			{
+				baud_id.value = Number(baud_id.value) + Number(baud_id.step);
+				common_onchange(baud_id);
+			}
+			else if (!Number(is_add) && (Number(baud_id.value) > Number(baud_id.min)))
+			{
+				baud_id.value = Number(baud_id.value) - Number(baud_id.step);
+				common_onchange(baud_id);
+			}
+		}
+
+		document.write("<h6>提示：断开手机后，相关参数会自动保存");
+		document.write("<h3>版本号： "+getQueryVariable("VER")+"</h3>");
+
+		var param_array = new Array();
+		param_str = getQueryVariable("A48Lb2");
+		for (var i = 0; i < (param_str.length / 2); i++) {
+			param_array[i] = Number("0x" + param_str.substring(i * 2, i * 2 + 2));
+		}
+
+		function load() {
+			document.getElementById("dpi_range").value = param_array[159] * 256 + param_array[158];
+			document.getElementById("dpi_number").value = param_array[159] * 256 + param_array[158];
+			document.getElementById("filter_x_range").value = param_array[162];
+			document.getElementById("filter_x_number").value = param_array[162];
+			document.getElementById("filter_y_range").value = param_array[163];
+			document.getElementById("filter_y_number").value = param_array[163];
+			document.getElementById("power_x_range").value = param_array[164];
+			document.getElementById("power_x_number").value = param_array[164];
+			document.getElementById("multiplier_x_range").value = param_array[167] * 256 + param_array[166];
+			document.getElementById("multiplier_x_number").value = param_array[167] * 256 + param_array[166];
+			document.getElementById("power_y_range").value = param_array[165];
+			document.getElementById("power_y_number").value = param_array[165];
+			document.getElementById("multiplier_y_range").value = param_array[169] * 256 + param_array[168];
+			document.getElementById("multiplier_y_number").value = param_array[169] * 256 + param_array[168];
+			document.getElementById("deadmin_type_range").value = param_array[171];
+			document.getElementById("deadmin_type_number").value = param_array[171];
+			document.getElementById("deadmin_x_range").value = param_array[172];
+			document.getElementById("deadmin_x_number").value = param_array[172];
+			document.getElementById("deadmin_y_range").value = param_array[173];
+			document.getElementById("deadmin_y_number").value = param_array[173];
+			document.getElementById("deadmax_range").value = param_array[170];
+			document.getElementById("deadmax_number").value = param_array[170];
+		}
+	</script>
+
+	DPI
+	<button data-band="dpi_number" onclick="common_onclick(this, 0)">-</button>
+	<button data-band="dpi_number" onclick="common_onclick(this, 1)">+</button>
+	<form>
+		<input type="number" id="dpi_number" data-band="dpi_range" data-addr="158" data-width="4" value="800" min="100" max="20000" step="100" onchange="common_onchange(this)">
+		<br>
+		<input type="range" id="dpi_range" data-band="dpi_number" data-addr="158" data-width="4" value="800" min="100" max="20000" step="100" onchange="common_onchange(this)">
+	</form>
+
+	Filter X
+	<button data-band="filter_x_number" onclick="common_onclick(this, 0)">-</button>
+	<button data-band="filter_x_number" onclick="common_onclick(this, 1)">+</button>
+	<form>
+		<input type="number" id="filter_x_number" data-band="filter_x_range" data-addr="162" data-width="1" value="1" min="0" max="100" step="1" onchange="common_onchange(this);">
+		<br>
+		<input type="range" id="filter_x_range" data-band="filter_x_number" data-addr="162" data-width="1" value="1" min="0" max="100" step="1" onchange="common_onchange(this);">
+	</form>
+
+	Filter Y
+	<button data-band="filter_y_number" onclick="common_onclick(this, 0)">-</button>
+	<button data-band="filter_y_number" onclick="common_onclick(this, 1)">+</button>
+	<form>
+		<input type="number" id="filter_y_number" data-band="filter_y_range" data-addr="163" data-width="1" value="1" min="0" max="100" step="1" onchange="common_onchange(this);">
+		<br>
+		<input type="range" id="filter_y_range" data-band="filter_y_number" data-addr="163" data-width="1" value="1" min="0" max="100" step="1" onchange="common_onchange(this);">
+	</form>
+
+	Power X
+	<button data-band="power_x_number" onclick="common_onclick(this, 0)">-</button>
+	<button data-band="power_x_number" onclick="common_onclick(this, 1)">+</button>
+	<form>
+		<input type="number" id="power_x_number" data-band="power_x_range" data-addr="164" data-width="1" value="1" min="0" max="200" step="1" onchange="common_onchange(this);">
+		<br>
+		<input type="range" id="power_x_range" data-band="power_x_number" data-addr="164" data-width="1" value="1" min="0" max="200" step="1" onchange="common_onchange(this);">
+	</form>
+
+	Multiplier X
+	<button data-band="multiplier_x_number" onclick="common_onclick(this, 0)">-</button>
+	<button data-band="multiplier_x_number" onclick="common_onclick(this, 1)">+</button>
+	<form>
+		<input type="number" id="multiplier_x_number" data-band="multiplier_x_range" data-addr="166" data-width="2" value="100" min="0" max="3000" step="1" onchange="common_onchange(this);">
+		<br>
+		<input type="range" id="multiplier_x_range" data-band="multiplier_x_number" data-addr="166" data-width="2" value="100" min="0" max="3000" step="1" onchange="common_onchange(this);">
+	</form>
+
+	Power Y
+	<button data-band="power_y_number" onclick="common_onclick(this, 0)">-</button>
+	<button data-band="power_y_number" onclick="common_onclick(this, 1)">+</button>
+	<form>
+		<input type="number" id="power_y_number" data-band="power_y_range" data-addr="165" data-width="1" value="1" min="0" max="200" step="1" onchange="common_onchange(this);">
+		<br>
+		<input type="range" id="power_y_range" data-band="power_y_number" data-addr="165" data-width="1" value="1" min="0" max="200" step="1" onchange="common_onchange(this);">
+	</form>
+
+	Multiplier Y
+	<button data-band="multiplier_y_number" onclick="common_onclick(this, 0)">-</button>
+	<button data-band="multiplier_y_number" onclick="common_onclick(this, 1)">+</button>
+	<form>
+		<input type="number" id="multiplier_y_number" data-band="multiplier_y_range" data-addr="168" data-width="2" value="100" min="0" max="3000" step="1" onchange="common_onchange(this);">
+		<br>
+		<input type="range" id="multiplier_y_range" data-band="multiplier_y_number" data-addr="168" data-width="2" value="100" min="0" max="3000" step="1" onchange="common_onchange(this);">
+	</form>
+
+	Deadmin Type
+	<button data-band="deadmin_type_number" onclick="common_onclick(this, 0)">-</button>
+	<button data-band="deadmin_type_number" onclick="common_onclick(this, 1)">+</button>
+	<form>
+		<input type="number" id="deadmin_type_number" data-band="deadmin_type_range" data-addr="171" data-width="1" value="0" min="0" max="1" step="1" onchange="common_onchange(this);">
+		<br>
+		<input type="range" id="deadmin_type_range" data-band="deadmin_type_number" data-addr="171" data-width="1" value="0" min="0" max="1" step="1" onchange="common_onchange(this);">
+	</form>
+
+	Deadmin X
+	<button data-band="deadmin_x_number" onclick="common_onclick(this, 0)">-</button>
+	<button data-band="deadmin_x_number" onclick="common_onclick(this, 1)">+</button>
+	<form>
+		<input type="number" id="deadmin_x_number" data-band="deadmin_x_range" data-addr="172" data-width="1" value="0" min="0" max="100" step="1" onchange="common_onchange(this);">
+		<br>
+		<input type="range" id="deadmin_x_range" data-band="deadmin_x_number" data-addr="172" data-width="1" value="0" min="0" max="100" step="1" onchange="common_onchange(this);">
+	</form>
+
+	Deadmin Y
+	<button data-band="deadmin_y_number" onclick="common_onclick(this, 0)">-</button>
+	<button data-band="deadmin_y_number" onclick="common_onclick(this, 1)">+</button>
+	<form>
+		<input type="number" id="deadmin_y_number" data-band="deadmin_y_range" data-addr="173" data-width="1" value="0" min="0" max="100" step="1" onchange="common_onchange(this);">
+		<br>
+		<input type="range" id="deadmin_y_range" data-band="deadmin_y_number" data-addr="173" data-width="1" value="0" min="0" max="100" step="1" onchange="common_onchange(this);">
+	</form>
+
+	Deadmax
+	<button data-band="deadmax_number" onclick="common_onclick(this, 0)">-</button>
+	<button data-band="deadmax_number" onclick="common_onclick(this, 1)">+</button>
+	<form>
+		<input type="number" id="deadmax_number" data-band="deadmax_range" data-addr="170" data-width="1" value="142" min="100" max="142" step="1" onchange="common_onchange(this);">
+		<br>
+		<input type="range" id="deadmax_range" data-band="deadmax_number" data-addr="170" data-width="1" value="142" min="100" max="142" step="1" onchange="common_onchange(this);">
+	</form>
+	<body onload="load()">
+</body>
+</html>
